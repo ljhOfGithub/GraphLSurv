@@ -63,8 +63,11 @@ def auto_look_up_te(
     infer the column.
 
     [Notice] If it is a censored example, the return label is negative, if it is an 
-    event example, the return label is positive.
+    event example, the return label is positive. 删失例子则返回负数标签，事件例子则返回正数标签
     """
+    # df: 一个 DataFrame，包含要查找的标签信息。
+    # ids: 要查找的标签对应的 ID 列表。
+    # at_column: 用于指定查找的 ID 所在的列名。如果没有指定，则会自动根据已有的列名匹配 ID。
     if at_column is None:
         if df['patient_id'].isin(ids).sum() >= len(ids):
             # print("Matched `ids` in column `patient_id`")
@@ -77,11 +80,13 @@ def auto_look_up_te(
             raise RuntimeError('Some `ids` not matched')
 
     res, mask = [], []
+    # import pdb; pdb.set_trace()
     for cid in ids:
         matched_df = df[df[at_column] == cid]
         if matched_df.empty:
             res.append(0)
             mask.append(0)
+            # print(cid)
         else:
             irow = matched_df.index[0]
             if pd.isnull(df.loc[irow, 't']) or pd.isnull(df.loc[irow, 'e']):

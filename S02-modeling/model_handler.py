@@ -105,7 +105,7 @@ class DRPMHandler(object):
         # For reporting results
         if experiment == 'sim':
             # Prepare datasets 
-            train_set = self._prepare_dataset(pids_train, self.cfg)
+            train_set = self._prepare_dataset(pids_train, self.cfg) #pids_train是patient_id
             val_set   = self._prepare_dataset(pids_val, self.cfg)
             test_set  = self._prepare_dataset(pids_test, self.cfg)
             train_loader = DataLoader(train_set, batch_size=self.cfg['batch_size'], num_workers=self.cfg['num_workers'], shuffle=True)
@@ -324,6 +324,7 @@ class DRPMHandler(object):
         print('[INFO] dataset with undirect graph: {}'.format(cfg['undirect_graph']))
         assert 'k_knn_graph' in cfg
         dir_pat_graph = cfg['dir_pat_graph'].format(cfg['k_knn_graph'])
+        # import pdb; pdb.set_trace()
         dataset = ds.PatchGraphDataset(patient_ids, dir_pat_graph,
             cfg['dir_sld_feat'], cfg['path_csv'], if_force_undirect=cfg['undirect_graph'])
         assert cfg['model_in_dim'] == dataset.num_features

@@ -86,8 +86,35 @@ def grid(kwargs):
         for e in v:
             copy_v.append(MncDc(e) if isinstance(e, tuple) else e)
         sin[k] = copy_v
-
+    # try:
+    # current_locals = locals()
+    # with open('./variables.txt', 'w') as f:
+    #     import pprint; pprint.pprint(current_locals, stream=f)
+    # import pdb; pdb.set_trace()
     grd = np.array(np.meshgrid(*sin.values()), dtype=object).T.reshape(-1, len(sin.values()))
+
+#     except Exception as e:
+#         import traceback
+#         import pprint
+#         import sys
+#         # traceback.print_exc()
+#         exc_type, exc_value, exc_traceback = sys.exc_info()
+
+#         # 将堆栈信息写入文件
+#         with open('./error_log.txt', 'w') as f:
+#             traceback.print_exception(exc_type, exc_value, exc_traceback, file=f)
+
+#         # 获取当前变量的值
+#         current_locals = locals()
+
+#         # 将变量值写入文件
+#         with open('./variables.txt', 'w') as f:
+#             pprint.pprint(current_locals, stream=f)
+#         return [merge_dicts(
+#         {k: v for k, v in kwargs.items() if not isinstance(v, list)},
+#         {k: vv[i]() if isinstance(vv[i], MncDc) else vv[i] for i, k in enumerate(sin)}
+#     ) for vv in grd]
+    
     return [merge_dicts(
         {k: v for k, v in kwargs.items() if not isinstance(v, list)},
         {k: vv[i]() if isinstance(vv[i], MncDc) else vv[i] for i, k in enumerate(sin)}

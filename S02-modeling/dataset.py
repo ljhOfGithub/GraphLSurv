@@ -31,7 +31,7 @@ class PatchGraphDataset(Dataset):
     """
     def __init__(self, patient_ids: List, path_pat_graph: str, path_sld_feat: str, path_label: str, if_force_undirect: bool = False, transform: Optional[Callable] = None):
         super(PatchGraphDataset, self).__init__()
-
+        # import pdb; pdb.set_trace()
         self.if_force_undirect = if_force_undirect
         self.transform = transform
         
@@ -45,7 +45,9 @@ class PatchGraphDataset(Dataset):
 
         # Get labels
         sdata = read_sdata(path_label)
+        # import pdb; pdb.set_trace()
         self.gy, gy_mask = auto_look_up_te(sdata, self.gids, at_column='patient_id')
+        # import pdb; pdb.set_trace()
         if sum(gy_mask) < len(gy_mask):
             raise ValueError('Some patient ids are not found in table {}'.format(path_label))
 
