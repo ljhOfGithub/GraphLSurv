@@ -5,13 +5,17 @@ random_state: 42
 
 # output
 # save_path: ./results/TCGA_BRCA/GraphLSurv
-save_path: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/GraphLSurv_result
-#实际的存放地址：/home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/GraphLSurv-result-seed_split_0
+# save_path: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/GraphLSurv_result
+# 实际的存放地址：/home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/GraphLSurv-result-seed_split_0
+save_path: /home/jupyter-ljh/data/mydata/GraphLSurv-main/S02-modeling/result/ljh/
+#改放在当前代码目录下
 # spliting
 seed_split: [0, 1, 2, 3, 4]
 # seed_split: 0 #方便调试
 # data_split: ./data_split/tcga_brca/tcga_brca-split{}.npz
-data_split: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/data_split/tcga_brca/tcga_brca-seed54-fold{}-ljh.npz #注意不要省略ljh
+# data_split: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/data_split/tcga_brca/tcga_brca-seed54-fold{}-ljh.npz #注意不要省略ljh
+data_split: /home/jupyter-ljh/data/mydata/GraphLSurv-main/S02-modeling/data_split/tcga_brca_ljh/tcga_brca-seed54-fold{}-ljh.npz #注意不要省略ljh 
+#改放在当前代码目录下
 
 # data
 dataset_name: tcga_brca
@@ -21,10 +25,12 @@ dir_sld_feat: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feat
 # k_knn_graph: 10 
 k_knn_graph: 6 #对应graph building那一步的k
 # dir_pat_graph: /data/TCGA_BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k{}-t0
-dir_pat_graph: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k{}-t0
+# dir_pat_graph: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k{}-t0
+dir_pat_graph: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k{}-t0-mysplit
 # dir_pat_graph: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k{}-t0-part
 # path_csv: /data/TCGA_BRCA/TCGA_BRCA_path_full.csv
-path_csv: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/data_split/tcga_brca/tcga_brca_path_full_ljh.csv
+# path_csv: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/data_split/tcga_brca/tcga_brca_path_full_ljh.csv
+path_csv: /home/jupyter-ljh/data/mydata/GraphLSurv-main/S02-modeling/data_split/tcga_brca_ljh/tcga_brca_path_full_ljh.csv #改放在代码目录下
 undirect_graph: True
 split_stratify: False
 save_prediction: True
@@ -40,8 +46,8 @@ lr_factor: 0.8
 lr_patience: 5
 lr_min: 0.00001
 # epochs: 300
-epochs: 150
-# epochs: 2 #方便调试
+# epochs: 150
+epochs: 2 #方便调试
 bp_every_iters: 16
 patience: 10
 

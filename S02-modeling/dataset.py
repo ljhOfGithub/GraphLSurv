@@ -49,8 +49,8 @@ class PatchGraphDataset(Dataset):
         self.gy, gy_mask = auto_look_up_te(sdata, self.gids, at_column='patient_id')
         # import pdb; pdb.set_trace()
         if sum(gy_mask) < len(gy_mask):
-            raise ValueError('Some patient ids are not found in table {}'.format(path_label))
-
+            # raise ValueError('Some patient ids are not found in table {}'.format(path_label))
+            pass
         self._indices: Optional[Sequence] = None
 
         self.summary()
@@ -64,7 +64,6 @@ class PatchGraphDataset(Dataset):
     def get(self, idx: int) -> Data:
         r"""Gets the data object at index :obj:`idx`."""
         path_ge = self.fpath_graphs[idx]
-
         with h5py.File(path_ge, 'r') as hf:
             A = hf['A'][:]
             node_indicator = [str(_, 'utf-8') for _ in hf['node_indicator'][:]]

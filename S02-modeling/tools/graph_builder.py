@@ -119,11 +119,17 @@ class GraphBuilder(object):
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Tools of Building Graph Topology')
-    parser.add_argument('--dir_input', type=str, default=None, 
+    # parser.add_argument('--dir_input', type=str, default=None, 
+    #     help='Directory of slide patch features that are saved as H5 files.')
+    parser.add_argument('--dir_input', type=str, default='/home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/h5_files', 
         help='Directory of slide patch features that are saved as H5 files.')
-    parser.add_argument('--dir_output', type=str, default=None,
+    # parser.add_argument('--dir_output', type=str, default=None,
+    #     help='Directory of slide graph topology that are saved as H5 files.')
+    parser.add_argument('--dir_output', type=str, default='/home/jupyter-ljh/data/mntdata/data0/LI_jihao/GraphLSurv-BRCA/feats-l1-s256-mrandom_be-n1000-color_norm/graph-knn-k6-t0-mysplit',
         help='Directory of slide graph topology that are saved as H5 files.')
-    parser.add_argument('--csv_sld2pat', type=str, default=None,
+    # parser.add_argument('--csv_sld2pat', type=str, default=None,
+    #     help='CSV file used to mapping `slide_id` to `patient_id`.')
+    parser.add_argument('--csv_sld2pat', type=str, default='/home/jupyter-ljh/data/mydata/GraphLSurv-main/S02-modeling/data_split/tcga_brca_ljh/tcga_brca_path_full_ljh.csv',
         help='CSV file used to mapping `slide_id` to `patient_id`.')
     parser.add_argument('--graph_level', type=str, default='patient',
         help='Building graph on which level, default on patient level.')
@@ -135,10 +141,14 @@ def parse_args():
         help='The edge whose distance larger than t will be removed from graph.')
     parser.add_argument('--radius', '-r', type=str, default='diag',
         help='radius for method `radius_neighbors_graph`.')
-    parser.add_argument('--num_workers', type=int, default=1,
-        help='Number of cpus to process the whole dataset.')
-    parser.add_argument('--verbose', '-v', default=False, action='store_true',
-        help='if verbose.')
+    # parser.add_argument('--num_workers', type=int, default=1,
+    #     help='Number of cpus to process the whole dataset.')
+    parser.add_argument('--num_workers', type=int, default=0,
+        help='Number of cpus to process the whole dataset.') #方便调试
+    # parser.add_argument('--verbose', '-v', default=False, action='store_true',
+    #     help='if verbose.')
+    parser.add_argument('--verbose', '-v', default=True,
+    help='if verbose.') #方便调试
 
     return parser.parse_args()
 
@@ -187,6 +197,7 @@ def main(args):
 
     func_pipeline = partial(pipeline, args=args)
     res_process = []
+    # import pdb; pdb.set_trace()
     if args.num_workers > 1:
         with mp.Pool(processes=args.num_workers) as pool:
             res_process = pool.starmap(func_pipeline, zip(gids, gvals))
